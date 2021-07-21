@@ -1,4 +1,4 @@
-package com.example.foodsafety;
+package com.example.foodsafety.json;
 
 import org.json.JSONObject;
 
@@ -16,7 +16,7 @@ public class getBuilder {
     JSONObject json = new JSONObject();
 
         public getBuilder(String barcode) {
-            url = "https://ratings.food.gov.uk/";
+            url = "https://ratings.food.gov.uk/enhanced-search/en-GB";
             url = url.concat(barcode);
 
                 System.out.println(url);

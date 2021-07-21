@@ -51,4 +51,7 @@ dependencies {
 
     //test helper
     testImplementation "androidx.room:room-testing:$room_version"
+
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
 }

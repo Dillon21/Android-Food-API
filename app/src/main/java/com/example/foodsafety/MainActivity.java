@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.foodsafety.json.businessesJSON;
+import com.example.foodsafety.json.getBuilder;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     getBuilder get;
-    String input = "enhanced-search/en-GB/^/^/Rating/0/760/1/2/json";
+    String input = "/^/^/rating/1/760/pass/1/1/1500/json";
     public static TextView test;
     public JSONObject getRestaurants;
 
@@ -56,17 +57,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                        productJson pJ = new productJson(myResponse);
+                        businessesJSON.getJson pJ = new businessesJSON.getJson(myResponse);
                         Log.d("json", pJ.toString());
                         JSONArray jsonArray = new JSONArray();
                         jsonArray = pJ.getRestaurants();
                         Log.d("please", jsonArray.toString());
+
+                        Log.d("size","length of array" + String.valueOf(jsonArray.length()));
 
 
                     });
                 }
             }
         });
+
+
 
 
     }
