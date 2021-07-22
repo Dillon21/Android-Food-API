@@ -2,11 +2,14 @@ package com.example.foodsafety;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.foodsafety.json.businessesJSON;
+import com.example.foodsafety.json.business;
 import com.example.foodsafety.json.getBuilder;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,60 +24,53 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
-    getBuilder get;
-    String input = "/^/^/rating/1/760/pass/1/1/1500/json";
-    public static TextView test;
-    public JSONObject getRestaurants;
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
+public class MainActivity extends AppCompatActivity {
+
+    Button buttonAberdeen;
+    Button buttonGlasgow;
+    Button buttonDundee;
+    Button buttonEdinburgh;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        OkHttpClient client = new OkHttpClient();
-        get = new getBuilder(input);
-        //get = new getProducts(test.toString());
-        Request request = get.getRequest();
+        buttonAberdeen = findViewById(R.id.button);
 
-
-
-        client.newCall(request).enqueue(new Callback() {
+        buttonAberdeen.setOnClickListener((new View.OnClickListener(){
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-                Log.d("fail",request.url().toString());
+            public void onClick(View view){
+                setAberdeen(view);
             }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    final String myResponse = response.body().string();
-                    MainActivity.this.runOnUiThread(() -> {
-                        //test.setText(myResponse);
-                        Log.d("test", myResponse);
+        }));
+    }
 
 
 
-                        businessesJSON.getJson pJ = new businessesJSON.getJson(myResponse);
-                        Log.d("json", pJ.toString());
-                        JSONArray jsonArray = new JSONArray();
-                        jsonArray = pJ.getRestaurants();
-                        Log.d("please", jsonArray.toString());
+    public void setGlasgow(View view){
+        Intent intent = new Intent(this, DisplayBusinessActivity.class){
 
-                        Log.d("size","length of array" + String.valueOf(jsonArray.length()));
+        };
+    }
 
-
-                    });
-                }
-            }
-        });
-
-
-
+    public void setAberdeen(View view){
+        Intent intent = new Intent(this,DisplayBusinessActivity.class);
+            intent.putExtra(EXTRA_MESSAGE,"/^/^/rating/1/760/pass/1/1/1500/json");
+            startActivity(intent);
 
     }
+
+    public void setEdinburgh(View view){
+
+    }
+
+    public void setDundee(View view){
+
+    }
+
 }
 
 
