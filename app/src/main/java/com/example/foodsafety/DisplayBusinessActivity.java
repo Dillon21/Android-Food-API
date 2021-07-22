@@ -48,12 +48,12 @@ public class DisplayBusinessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_recycler);
 
-        //List<business> businesses = businessRepository.getRepository(getApplicationContext());
+        //List<business> businesses = businessRepository.getRepository(getApplicationContext()).getAllBusinesses();
 
 
 
         Intent intent = getIntent();
-        businessName = findViewById(R.id.textView);
+
 
 
 

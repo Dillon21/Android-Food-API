@@ -2,6 +2,7 @@ package com.example.foodsafety.json;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,8 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@Entity(tableName = "restaurants")
+@Entity(tableName = "businesses")
 public class business {
+
+    @NonNull
     @PrimaryKey
     public int ID;
 

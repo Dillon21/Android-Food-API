@@ -5,6 +5,7 @@ import android.os.Build;
 import android.util.Log;
 
 
+import com.example.foodsafety.BusinessDao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,8 @@ import java.util.List;
 
 public class businessRepository {
 
+    private BusinessDao businessDao;
+
     public static businessRepository INSTANCE;
 
     private Context context;
@@ -24,28 +27,31 @@ public class businessRepository {
             synchronized (businessRepository.class) {
                 INSTANCE = new businessRepository();
                 INSTANCE.context = context;
+                BusinessDatabase db = BusinessDatabase.getDatabase(context);
+                INSTANCE.businessDao = db.businessDao();
             }
         }
         return INSTANCE;
     }
 
-    //public business getBusiness(String )
+
+    public void storeBusiness(business business){
+        businessDao.insert(business);
+    }
+
+    public void deleteBusiness(business business){
+        businessDao.delete(business);
+    }
+
+    public List<business> getAllBusinesses(){
+        return businessDao.getAll();
+    }
 
     public static ArrayList<business> getJson(String response) {
         String json = response;
         JSONObject getEst;
         JSONObject getCol;
         JSONArray tasksArray = new JSONArray();
-
-        /**
-         * takes in json respons from api and grabs inner array of products found
-         * @param json
-         */
-        /*public getJson(String json){
-            this.json = json;
-        }*/
-
-
 
             ArrayList<business> businesses = new ArrayList<>();
             try {
