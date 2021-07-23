@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonGlasgow;
     Button buttonDundee;
     Button buttonEdinburgh;
+    Button buttonFavourites;
     TextView lastAccessed;
     public static final String EXTRA = "EXTRA";
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         buttonGlasgow = (Button)findViewById(R.id.btn_Glasgow);
         buttonDundee = (Button)findViewById(R.id.btn_dundee);
         buttonEdinburgh = (Button)findViewById(R.id.btn_Edinburgh);
+        buttonFavourites = (Button)findViewById(R.id.btn_fav);
         lastAccessed = findViewById(R.id.tv_last_access);
 
         //called if Aberdeen button is pressed
@@ -75,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 String message ="/^/^/rating/1/773/pass/1/1/1500/json";
                 Intent intent = new Intent(view.getContext(),DisplayBusinessActivity.class);
                 intent.putExtra(EXTRA,message);
+                startActivity(intent);
+            }
+        }));
+
+        buttonFavourites.setOnClickListener((new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(view.getContext(),FavouriteBusinessesActivity.class);
                 startActivity(intent);
             }
         }));
