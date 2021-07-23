@@ -24,11 +24,11 @@ public class business {
     @ColumnInfo(name = "rating")
     public String rating;
 
+    @ColumnInfo(name = "longitude")
+    public String longitude;
 
-
-    public void setID(int id){
-        this.ID = id;
-    }
+    @ColumnInfo(name = "latitude")
+    public String latitude;
 
     public void setBusiness_name(String name){
         this.business_name = name;
@@ -42,6 +42,8 @@ public class business {
         return ID;
     }
 
+    public void setID(int id){ this.ID = id; }
+
     public String getBusiness_name(){
         return business_name;
     }
@@ -49,5 +51,13 @@ public class business {
     public String getRating(){
         return rating;
     }
+
+    public String getLongitude() { return longitude; }
+
+    public void setLongitude(String longitude) { this.longitude = longitude; }
+
+    public String getLatitude() { return latitude; }
+
+    public void setLatitude(String latitude) { this.latitude = latitude; }
 }
 

@@ -1,9 +1,12 @@
 package com.example.foodsafety;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class BusinessAdapterView extends RecyclerView.Adapter<BusinessAdapterView.BusinessViewHolder> {
 
@@ -47,12 +52,16 @@ public class BusinessAdapterView extends RecyclerView.Adapter<BusinessAdapterVie
     @Override
     public void onBindViewHolder(@NonNull @NotNull BusinessViewHolder holder, int position) {
         business business = this.businesses.get(position);
+        String lat = business.getLatitude();
+        String lon = business.getLongitude();
 
         TextView tv_rating = holder.BusinessView.findViewById(R.id.tv_businessRating);
         TextView tv_businessName = holder.BusinessView.findViewById(R.id.tv_businessName);
 
         tv_rating.setText(business.getRating());
         tv_businessName.setText(business.getBusiness_name());
+
+
 
         //tv_businessName.setText(String.valueOf(business.getID()));
 
@@ -68,12 +77,32 @@ public class BusinessAdapterView extends RecyclerView.Adapter<BusinessAdapterVie
     public class BusinessViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View BusinessView;
         private BusinessAdapterView adapter;
+        public Button openMap, fav;
 
         public BusinessViewHolder(View BusinessView, BusinessAdapterView adapter){
             super(BusinessView);
             this.BusinessView = BusinessView;
             this.adapter = adapter;
             this.BusinessView.setOnClickListener(this);
+
+            BusinessView.findViewById(R.id.btn_location).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String cord = "geo:" + "-2.129854500000001" + "," + "57.16734255";
+                    Uri mapsUri = Uri.parse(cord);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsUri);
+                    mapIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(context,mapIntent, null);
+                }
+            }); {
+
+            };
+
+
+
+
+
         }
 
         @Override
@@ -81,6 +110,7 @@ public class BusinessAdapterView extends RecyclerView.Adapter<BusinessAdapterVie
             int position = getAbsoluteAdapterPosition();
 
             business business = businesses.get(position);
+
 
 
 

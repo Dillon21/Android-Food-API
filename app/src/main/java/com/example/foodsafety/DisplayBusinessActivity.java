@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 
@@ -38,8 +40,8 @@ public class DisplayBusinessActivity extends AppCompatActivity {
 
     public static TextView businessName;
     public static TextView businessRating;
-    public static Long lat;
-    public static Long lon;
+    //public static Long lat;
+    //public static Long lon;
 
 
 
@@ -76,20 +78,25 @@ public class DisplayBusinessActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     final String myResponse = response.body().string();
                     DisplayBusinessActivity.this.runOnUiThread(() -> {
-                        //test.setText(myResponse);
+
+                        //Build list for recyclerview
                         Log.d("test", myResponse);
                         ArrayList<business> list = new ArrayList<>();
-
                         list = businessRepository.getJson(myResponse);
+
+                        /* Check for array size
                         business test = list.get(0);
                         int id = test.getID();
                         Log.d("test", String.valueOf(list.size()));
+                         */
 
 
                         RecyclerView recyclerView = findViewById(R.id.rv_Businesses);
                         RecyclerView.Adapter adapter = new BusinessAdapterView(getApplicationContext(),list);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
 
 
                     });
@@ -103,6 +110,22 @@ public class DisplayBusinessActivity extends AppCompatActivity {
 
     public void getBusinessDetails(ArrayList<business> list, int index){
         business business = list.get(index);
+
+        Button openMap, saveFav;
+
+        openMap = findViewById(R.id.btn_location);
+        saveFav = findViewById(R.id.btn_favourite);
+
+        openMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //String cord = "geo:" + lon + "," + lat;
+                //Uri mapsUri = Uri.parse(cord);
+                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsUri);
+                //mapIntent.setPackage("com.google.android.apps.maps");
+                //startActivity(mapIntent);
+            }
+        });
 
     }
 

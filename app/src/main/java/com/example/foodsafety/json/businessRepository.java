@@ -1,7 +1,6 @@
 package com.example.foodsafety.json;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 
@@ -27,7 +26,7 @@ public class businessRepository {
             synchronized (businessRepository.class) {
                 INSTANCE = new businessRepository();
                 INSTANCE.context = context;
-                BusinessDatabase db = BusinessDatabase.getDatabase(context);
+                businessDatabase db = businessDatabase.getDatabase(context);
                 INSTANCE.businessDao = db.businessDao();
             }
         }
@@ -72,6 +71,11 @@ public class businessRepository {
                     business.setID((Integer.parseInt(object.getString("FHRSID"))));
                     business.setBusiness_name(object.getString("BusinessName"));
                     business.setRating(object.getString("RatingValue"));
+                    JSONObject geocode = object.getJSONObject("Geocode");
+                    Log.d("geocode", String.valueOf(geocode) );
+                    business.setLongitude(geocode.getString("Longitude"));
+                    business.setLatitude(geocode.getString("Latitude"));
+                    Log.d("location", "long " + business.getLongitude() + " lat " + business.getLatitude());
 
                     businesses.add(business);
                 } catch(JSONException e){
