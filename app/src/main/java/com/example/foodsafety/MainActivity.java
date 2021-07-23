@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         String date = pref.getString("date", "");
         Log.d("dateLoad", date);
         lastAccessed = findViewById(R.id.tv_last_access);
-        lastAccessed.setText("Last Accessed" + date);
+        lastAccessed.setText("Last Accessed: " + date);
     }
 
 }
