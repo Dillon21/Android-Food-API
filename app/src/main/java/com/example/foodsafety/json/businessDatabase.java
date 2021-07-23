@@ -9,6 +9,8 @@ import androidx.room.RoomDatabase;
 import com.example.foodsafety.BusinessDao;
 
 @Database(entities = {business.class}, version = 1)
+
+//class to create ROOM database, taken from lectures
 public abstract class businessDatabase extends RoomDatabase {
 
     public abstract BusinessDao businessDao();

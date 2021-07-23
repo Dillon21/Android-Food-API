@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import com.example.foodsafety.json.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -17,9 +18,11 @@ public interface BusinessDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insert(business business);
 
+    //insert list into database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertList(business...businesses);
 
+    //get all businesses from databse
     @Query("SELECT * FROM businesses ORDER BY ID ASC")
     List<business> getAll();
 

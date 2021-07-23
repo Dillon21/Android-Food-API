@@ -1,6 +1,7 @@
 package com.example.foodsafety;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ComponentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +35,7 @@ import okhttp3.Response;
 public class DisplayBusinessActivity extends AppCompatActivity {
 
     getBuilder get;
-    String input = "/^/^/rating/1/760/pass/1/1/1500/json";
+
     public static TextView test;
 
 
@@ -50,22 +51,17 @@ public class DisplayBusinessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_recycler);
 
-        //List<business> businesses = businessRepository.getRepository(getApplicationContext()).getAllBusinesses();
-
-
-
+        //takes in command to edit api request
         Intent intent = getIntent();
+        String input = intent.getStringExtra(MainActivity.EXTRA);
 
-
-
-
+        //create new request
         OkHttpClient client = new OkHttpClient();
         get = new getBuilder(input);
-        //get = new getProducts(test.toString());
         Request request = get.getRequest();
 
 
-
+        //callback if request fails
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -73,6 +69,7 @@ public class DisplayBusinessActivity extends AppCompatActivity {
                 Log.d("fail",request.url().toString());
             }
 
+            //if there is response
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful()) {
@@ -90,7 +87,7 @@ public class DisplayBusinessActivity extends AppCompatActivity {
                         Log.d("test", String.valueOf(list.size()));
                          */
 
-
+                        //input response to recyclerview
                         RecyclerView recyclerView = findViewById(R.id.rv_Businesses);
                         RecyclerView.Adapter adapter = new BusinessAdapterView(getApplicationContext(),list);
                         recyclerView.setAdapter(adapter);

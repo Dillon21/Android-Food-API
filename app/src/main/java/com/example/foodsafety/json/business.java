@@ -12,7 +12,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 @Entity(tableName = "businesses")
+//creates database structure
 public class business {
+
 
     @NonNull
     @PrimaryKey
@@ -30,6 +32,7 @@ public class business {
     @ColumnInfo(name = "latitude")
     public String latitude;
 
+    //getters and setters
     public void setBusiness_name(String name){
         this.business_name = name;
     }

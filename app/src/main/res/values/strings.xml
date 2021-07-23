@@ -1,3 +1,23 @@
 <resources>
+
     <string name="app_name">Food Safety</string>
+
+    <string name="Welcome">Welcome to the safe restaurant recommender</string>
+    <string name="select">Please select a city you would like to eat in</string>
+
+    <!-- values for main buttons -->
+    <string name="Aberdeen">Aberdeen</string>
+    <string name="Glasgow">Glasgow</string>
+    <string name="Dundee">Dundee</string>
+    <string name="Edinburgh">Edinburgh</string>
+    <string name ="Favourite">Favourites</string>
+    <string name="map">Map</string>
+    <string name ="fav">Favourite</string>
+
+    <!-- textViews -->
+    <string name ="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="name">Name</string>
+    <string name = "rating">Rating</string>
+    <string name="ID">ID</string>
 </resources>

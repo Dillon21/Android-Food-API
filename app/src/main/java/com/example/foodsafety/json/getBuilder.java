@@ -13,6 +13,8 @@ import okhttp3.RequestBody;
 public class getBuilder {
     private Request request;
     public String url;
+
+    //OKHTTP Get request builder
     JSONObject json = new JSONObject();
 
         public getBuilder(String barcode) {
@@ -26,9 +28,6 @@ public class getBuilder {
                         .addHeader("x-api-version", "1")
                         .build();
             }
-
-
-
 
 
         public Request getRequest(){

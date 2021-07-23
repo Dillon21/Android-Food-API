@@ -33,19 +33,22 @@ public class businessRepository {
         return INSTANCE;
     }
 
-
+    //store business in database
     public void storeBusiness(business business){
         businessDao.insert(business);
     }
 
+    //delete business from database
     public void deleteBusiness(business business){
         businessDao.delete(business);
     }
 
-    public List<business> getAllBusinesses(){
-        return businessDao.getAll();
+    //get all businesses from databse (NOT USED)
+    public ArrayList<business> getAllBusinesses(){
+        return (ArrayList) businessDao.getAll();
     }
 
+    //parses the JSON from the OKHTTP response into usable objects
     public static ArrayList<business> getJson(String response) {
         String json = response;
         JSONObject getEst;
@@ -66,17 +69,20 @@ public class businessRepository {
             for (int i = 0; i < tasksArray.length();i++){
                 business business = new business();
                 try {
-
+                    //breaking down JSON objects
                     JSONObject object = tasksArray.getJSONObject(i);
                     business.setID((Integer.parseInt(object.getString("FHRSID"))));
                     business.setBusiness_name(object.getString("BusinessName"));
                     business.setRating(object.getString("RatingValue"));
                     JSONObject geocode = object.getJSONObject("Geocode");
+                    //testing if ojects are being taken
                     Log.d("geocode", String.valueOf(geocode) );
                     business.setLongitude(geocode.getString("Longitude"));
                     business.setLatitude(geocode.getString("Latitude"));
+                    //test geocode json
                     Log.d("location", "long " + business.getLongitude() + " lat " + business.getLatitude());
 
+                    //add business
                     businesses.add(business);
                 } catch(JSONException e){
                     e.printStackTrace();
@@ -85,6 +91,7 @@ public class businessRepository {
             return businesses;
         }//CONCAT LATER IN MAIN
 
+        //test length of JSON ARRAY (NOT USED)
         public String getBusinessesString(String myResponse) {
 
             String stringJson = "";
